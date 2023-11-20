@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Vital Sign 제목 -->
+    <TextView
+        android:id="@+id/tvVitalSignTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Vital Sign"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="7dp"/>
+
+    <!-- 운동 기록 그래프 -->
+    <!-- 실제 그래프 구현은 커스텀 뷰 또는 외부 라이브러리를 사용하여 구현 필요 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- 사용자 프로필 이미지 -->
+        <ImageView
+            android:id="@+id/imgUserProfile"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_profile_test"
+            android:scaleType="centerCrop"
+            android:padding="4dp"
+            android:background="@drawable/rounded_image"
+            android:layout_marginEnd="16dp"/>
+
+        <!-- 사용자 이름 -->
+        <TextView
+            android:id="@+id/tvUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="사용자 이름"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/flExerciseGraph"
+        android:layout_width="match_parent"
+        android:layout_height="338dp"
+        android:layout_marginTop="16dp"
+        android:background="#D3D3D3" /> <!-- 그래프 배경 색상 -->
+
+    <!-- 최근 수행 루틴 및 나의 루틴 버튼 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="최근 수행 루틴"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnMyRoutine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="나의 루틴 →" />
+    </LinearLayout>
+
+    <!-- 최근 수행 루틴 3가지 -->
+    <!-- 실제 구현에서는 RecyclerView 또는 ListView를 사용하는 것이 적합 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp">
+
+        <!-- 루틴 항목 예시, 실제로는 여러 개가 동적으로 생성되어야 함 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="루틴 이름 1" />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="54dp"
+                android:drawableTop="@drawable/ic_action_name"
+                android:gravity="center"
+                android:background="#D3D3D3"
+                android:text="버튼"
+                android:textColor="#000000"
+                app:icon="@drawable/ic_action_name"/>
+                <!-- 미트볼 메뉴 아이콘 리소스 -->
+        </LinearLayout>
+        <!-- 다른 루틴 항목들은 여기에 추가 -->
+    </LinearLayout>
+</LinearLayout>
