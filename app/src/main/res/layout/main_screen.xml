@@ -83,29 +83,12 @@
         android:layout_marginTop="8dp">
 
         <!-- 루틴 항목 예시, 실제로는 여러 개가 동적으로 생성되어야 함 -->
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recentRoutineRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
+            android:layout_marginTop="8dp"/>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="루틴 이름 1" />
-
-            <Button
-                android:layout_width="50dp"
-                android:layout_height="54dp"
-                android:drawableTop="@drawable/ic_action_name"
-                android:gravity="center"
-                android:background="#D3D3D3"
-                android:text="버튼"
-                android:textColor="#000000"
-                app:icon="@drawable/ic_action_name"/>
-                <!-- 미트볼 메뉴 아이콘 리소스 -->
-        </LinearLayout>
         <!-- 다른 루틴 항목들은 여기에 추가 -->
     </LinearLayout>
 </LinearLayout>
