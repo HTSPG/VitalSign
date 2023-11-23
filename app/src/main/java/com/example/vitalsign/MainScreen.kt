@@ -47,9 +47,9 @@ class MainScreen : AppCompatActivity() {
         // TODO: 최근 루틴 데이터 로딩 로직 (최대 3개)
         // 예시 데이터 로딩
         recentRoutines = listOf(
-            Routine("루틴 1", "설명"),
-            Routine("루틴 2", "설명"),
-            Routine("루틴 3", "설명")
+            Routine("1","루틴 1"),
+            Routine("2", "루틴 2"),
+            Routine("3","루틴 3")
         )
         recentRoutineAdapter.updateData(recentRoutines)
     }
