@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- 루틴 이름 -->
+    <TextView
+        android:id="@+id/tvRoutineName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="루틴 이름"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- 루틴 내의 운동 목록 RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvExercises"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- 하단 버튼 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- 루틴 시작 버튼 -->
+        <Button
+            android:id="@+id/btnStartRoutine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="루틴 시작" />
+
+        <!-- 루틴 편집 버튼 -->
+        <Button
+            android:id="@+id/btnEditRoutine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="루틴 편집" />
+    </LinearLayout>
+</LinearLayout>
