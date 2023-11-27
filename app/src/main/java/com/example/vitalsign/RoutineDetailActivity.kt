@@ -1,4 +1,5 @@
 package com.example.vitalsign
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -37,7 +38,13 @@ class RoutineDetailActivity : AppCompatActivity() {
 
         // 루틴 편집 버튼 클릭 리스너
         btnEditRoutine.setOnClickListener {
-            // TODO: 루틴 편집 화면으로 이동
+            // 인텐트에서 현재 루틴 데이터 가져오기
+            val routine = intent.getSerializableExtra("ROUTINE_DATA") as? Routine
+            routine?.let {
+                val editIntent = Intent(this, RoutineEditActivity::class.java)
+                editIntent.putExtra("ROUTINE_DATA", it)
+                startActivity(editIntent)
+            }
         }
     }
 }

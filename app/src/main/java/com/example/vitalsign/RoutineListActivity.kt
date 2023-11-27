@@ -8,6 +8,7 @@ import com.example.vitalsign.Exercise
 import com.example.vitalsign.R
 import com.example.vitalsign.Routine
 import com.example.vitalsign.RoutineDetailActivity
+import com.example.vitalsign.RoutineEditActivity
 
 //루틴 목록 화면
 class RoutineListActivity : AppCompatActivity() {

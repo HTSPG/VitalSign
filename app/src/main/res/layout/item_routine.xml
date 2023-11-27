@@ -13,9 +13,4 @@
         android:text="루틴 이름"
         android:textSize="16sp" />
 
-    <!-- 미트볼 메뉴 아이콘 -->
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_meatball_menu" />
 </LinearLayout>
