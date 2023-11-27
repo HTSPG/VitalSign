@@ -1,3 +1,4 @@
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.vitalsign.Exercise
 import com.example.vitalsign.R
 import com.example.vitalsign.Routine
+import com.example.vitalsign.RoutineDetailActivity
 
+//루틴 목록 화면
 class RoutineListActivity : AppCompatActivity() {
 
     private lateinit var routineRecyclerView: RecyclerView
@@ -18,7 +21,10 @@ class RoutineListActivity : AppCompatActivity() {
 
         routineRecyclerView = findViewById(R.id.rvRoutineList)
         routineAdapter = RoutineAdapter(emptyList()) { routine ->
-            // TODO: 루틴 아이템 클릭 시 처리 ( 루틴 상세 화면으로 이동)
+            // 루틴 아이템 클릭 시 루틴 상세 화면으로 이동
+            val intent = Intent(this, RoutineDetailActivity::class.java)
+            intent.putExtra("ROUTINE_DATA", routine) // 루틴 데이터를 인텐트에 첨부
+            startActivity(intent)
         }
         routineRecyclerView.layoutManager = LinearLayoutManager(this)
         routineRecyclerView.adapter = routineAdapter

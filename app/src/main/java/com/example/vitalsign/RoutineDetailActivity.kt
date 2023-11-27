@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
+//루틴 시작화면
 class RoutineDetailActivity : AppCompatActivity() {
 
     private lateinit var exercisesRecyclerView: RecyclerView
