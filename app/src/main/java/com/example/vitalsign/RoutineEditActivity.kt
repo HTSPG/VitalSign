@@ -1,13 +1,39 @@
 package com.example.vitalsign
 
 import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class RoutineEditActivity : AppCompatActivity() {
+
+    private lateinit var exercisesRecyclerView: RecyclerView
+    private lateinit var exercisesAdapter: ExercisesEditAdapter
+    private var routine: Routine? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_routine_edit)
 
-        // TODO: 루틴 편집 로직 구현
+        routine = intent.getSerializableExtra("ROUTINE_DATA") as? Routine
+
+        val tvRoutineName = findViewById<TextView>(R.id.tvRoutineName)
+        tvRoutineName.text = routine?.name
+
+        exercisesRecyclerView = findViewById(R.id.rvExercises)
+        exercisesAdapter = ExercisesEditAdapter(routine?.exercises?.toMutableList() ?: mutableListOf()) { position ->
+            // 운동 삭제 로직
+            routine?.exercises?.removeAt(position)
+            exercisesAdapter.notifyItemRemoved(position)
+        }
+        exercisesRecyclerView.layoutManager = LinearLayoutManager(this)
+        exercisesRecyclerView.adapter = exercisesAdapter
+
+        val btnAddExercise = findViewById<Button>(R.id.btnAddExercise)
+        btnAddExercise.setOnClickListener {
+            // TODO: 운동 추가 로직
+        }
     }
 }
