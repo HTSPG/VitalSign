@@ -23,12 +23,18 @@ class RoutineListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_routine_list)
 
         routineRecyclerView = findViewById(R.id.rvRoutineList)
-        routineAdapter = RoutineAdapter(emptyList()) { routine ->
-            // 루틴 아이템 클릭 시 루틴 상세 화면으로 이동
-            val intent = Intent(this, RoutineDetailActivity::class.java)
-            intent.putExtra("ROUTINE_DATA", routine) // 루틴 데이터를 인텐트에 첨부
-            startActivity(intent)
-        }
+        routineAdapter = RoutineAdapter(
+            emptyList(),
+            onItemClicked = { routine ->
+                // 루틴 아이템 클릭 시 루틴 상세 화면으로 이동
+                val intent = Intent(this, RoutineDetailActivity::class.java)
+                intent.putExtra("ROUTINE_DATA", routine) // 인텐트에 루틴 데이터 첨부
+                startActivity(intent)
+            },
+            onAddButtonClicked = {
+                //'추가' 버튼을 클릭했을 때
+            }
+        )
         routineRecyclerView.layoutManager = LinearLayoutManager(this)
         routineRecyclerView.adapter = routineAdapter
 

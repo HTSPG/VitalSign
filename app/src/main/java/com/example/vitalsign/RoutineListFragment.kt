@@ -38,6 +38,11 @@ class RoutineListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         routineRecyclerView = view.findViewById(R.id.rvRoutineList)
+
+        //아이템 간격
+        val spaceInPixels = 30 // 픽셀 단위
+        routineRecyclerView.addItemDecoration(SpacesItemDecoration(spaceInPixels))
+
         routineAdapter = RoutineAdapter(
             routines,
             onItemClicked = { routine ->

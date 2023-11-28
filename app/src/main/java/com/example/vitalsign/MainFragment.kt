@@ -1,7 +1,6 @@
 package com.example.vitalsign
 
 import RecentRoutineAdapter
-import RoutineListActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,6 +41,10 @@ class MainFragment : Fragment() {
         }
         recentRoutineRecyclerView.layoutManager = LinearLayoutManager(context)
         recentRoutineRecyclerView.adapter = recentRoutineAdapter
+
+        //아이템 간격
+        val spaceInPixels = 30 // 픽셀 단위
+        recentRoutineRecyclerView.addItemDecoration(SpacesItemDecoration(spaceInPixels))
 
         // '내 루틴' 버튼 클릭 이벤트 설정
         val myRoutineButton = view.findViewById<Button>(R.id.btnMyRoutine)
