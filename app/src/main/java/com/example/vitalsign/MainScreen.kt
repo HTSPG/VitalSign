@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.content.Intent
 import android.widget.Button
+import com.example.vitalsign.Exercise
 import com.example.vitalsign.R
 import com.example.vitalsign.Routine
 import com.example.vitalsign.RoutineDetailActivity
@@ -48,9 +49,8 @@ class MainScreen : AppCompatActivity() {
         // TODO: 최근 루틴 데이터 로딩 로직 (최대 3개)
         // 예시 데이터 로딩
         recentRoutines = listOf(
-            Routine("1","루틴 1"),
-            Routine("2", "루틴 2"),
-            Routine("3","루틴 3")
+            Routine("1", "루틴 1", "", mutableListOf((Exercise("운동 1", 3, 10.0, 10)))),
+            Routine("2", "루틴 2", "", mutableListOf((Exercise("운동 2", 4, 12.5, 8))))
         )
         recentRoutineAdapter.updateData(recentRoutines)
     }

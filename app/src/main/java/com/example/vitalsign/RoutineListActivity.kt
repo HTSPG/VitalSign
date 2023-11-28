@@ -21,12 +21,18 @@ class RoutineListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_routine_list)
 
         routineRecyclerView = findViewById(R.id.rvRoutineList)
-        routineAdapter = RoutineAdapter(emptyList(), onItemClicked = ) { routine ->
-            // 루틴 아이템 클릭 시 루틴 상세 화면으로 이동
-            val intent = Intent(this, RoutineDetailActivity::class.java)
-            intent.putExtra("ROUTINE_DATA", routine) // 루틴 데이터를 인텐트에 첨부
-            startActivity(intent)
-        }
+        routineAdapter = RoutineAdapter(
+            emptyList(),
+            onItemClicked = { routine ->
+                // 루틴 아이템 클릭 시 루틴 상세 화면으로 이동
+                val intent = Intent(this, RoutineDetailActivity::class.java)
+                intent.putExtra("ROUTINE_DATA", routine) // 인텐트에 루틴 데이터 첨부
+                startActivity(intent)
+            },
+            onAddButtonClicked = {
+                //'추가' 버튼을 클릭했을 때
+            }
+        )
         routineRecyclerView.layoutManager = LinearLayoutManager(this)
         routineRecyclerView.adapter = routineAdapter
 
@@ -43,11 +49,11 @@ class RoutineListActivity : AppCompatActivity() {
     private fun loadRoutines() {
         // 예시 데이터 로딩
         val routines = listOf(
-            Routine("1", "루틴 1", listOf(Exercise("운동 1", 3, 10.0, 10))),
-            Routine("2", "루틴 2", listOf(Exercise("운동 2", 4, 12.5, 8))),
+            Routine("1", "루틴 1", "", mutableListOf((Exercise("운동 1", 3, 10.0, 10)))),
+            Routine("2", "루틴 2", "", mutableListOf((Exercise("운동 2", 4, 12.5, 8))))
             // 추가 루틴...
         )
-        routineAdapter.updateData(routines)
+//        routineAdapter.updateData(routines)
         // TODO: 루틴 데이터 로드 로직 구현
     }
 }
