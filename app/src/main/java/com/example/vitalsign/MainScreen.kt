@@ -1,3 +1,5 @@
+package com.example.vitalsign
+import RecentRoutineAdapter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,6 +11,7 @@ import com.example.vitalsign.R
 import com.example.vitalsign.Routine
 import com.example.vitalsign.RoutineDetailActivity
 
+//메인 화면
 class MainScreen : AppCompatActivity() {
 
     private lateinit var recentRoutineRecyclerView: RecyclerView
@@ -58,7 +61,7 @@ class MainScreen : AppCompatActivity() {
     private fun onRoutineClicked(routine: Routine) {
         // TODO: 루틴 아이템 클릭 시 루틴 시작 화면으로 이동
         val intent = Intent(this, RoutineDetailActivity::class.java)
-        intent.putExtra("ROUTINE_ID", routine.id)
+        intent.putExtra("ROUTINE_ID", routine)
         startActivity(intent)
     }
 }

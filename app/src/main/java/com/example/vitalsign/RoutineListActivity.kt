@@ -1,3 +1,5 @@
+package com.example.vitalsign
+import RoutineAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -21,18 +23,12 @@ class RoutineListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_routine_list)
 
         routineRecyclerView = findViewById(R.id.rvRoutineList)
-        routineAdapter = RoutineAdapter(
-            emptyList(),
-            onItemClicked = { routine ->
-                // 루틴 아이템 클릭 시 루틴 상세 화면으로 이동
-                val intent = Intent(this, RoutineDetailActivity::class.java)
-                intent.putExtra("ROUTINE_DATA", routine) // 인텐트에 루틴 데이터 첨부
-                startActivity(intent)
-            },
-            onAddButtonClicked = {
-                //'추가' 버튼을 클릭했을 때
-            }
-        )
+        routineAdapter = RoutineAdapter(emptyList()) { routine ->
+            // 루틴 아이템 클릭 시 루틴 상세 화면으로 이동
+            val intent = Intent(this, RoutineDetailActivity::class.java)
+            intent.putExtra("ROUTINE_DATA", routine) // 루틴 데이터를 인텐트에 첨부
+            startActivity(intent)
+        }
         routineRecyclerView.layoutManager = LinearLayoutManager(this)
         routineRecyclerView.adapter = routineAdapter
 
@@ -53,7 +49,7 @@ class RoutineListActivity : AppCompatActivity() {
             Routine("2", "루틴 2", "", mutableListOf((Exercise("운동 2", 4, 12.5, 8))))
             // 추가 루틴...
         )
-//        routineAdapter.updateData(routines)
+        routineAdapter.updateData(routines)
         // TODO: 루틴 데이터 로드 로직 구현
     }
 }
