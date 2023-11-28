@@ -7,6 +7,10 @@ android {
     namespace = "com.example.vitalsign"
     compileSdk = 33
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.example.vitalsign"
         minSdk = 24

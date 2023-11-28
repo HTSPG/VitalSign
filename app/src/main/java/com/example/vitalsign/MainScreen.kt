@@ -6,6 +6,7 @@ import android.content.Intent
 import android.widget.Button
 import com.example.vitalsign.R
 import com.example.vitalsign.Routine
+import com.example.vitalsign.RoutineDetailActivity
 
 class MainScreen : AppCompatActivity() {
 
@@ -56,7 +57,7 @@ class MainScreen : AppCompatActivity() {
 
     private fun onRoutineClicked(routine: Routine) {
         // TODO: 루틴 아이템 클릭 시 루틴 시작 화면으로 이동
-        val intent = Intent(this, StartRoutineActivity::class.java)
+        val intent = Intent(this, RoutineDetailActivity::class.java)
         intent.putExtra("ROUTINE_ID", routine.id)
         startActivity(intent)
     }
