@@ -1,3 +1,6 @@
+package com.example.vitalsign
+
+import RoutineAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -43,8 +46,8 @@ class RoutineListActivity : AppCompatActivity() {
     private fun loadRoutines() {
         // 예시 데이터 로딩
         val routines = listOf(
-            Routine("1", "루틴 1", listOf(Exercise("운동 1", 3, 10.0, 10))),
-            Routine("2", "루틴 2", listOf(Exercise("운동 2", 4, 12.5, 8))),
+            Routine("1", "루틴 1", listOf(Exercise("운동 1", 3, 10.0, 10)).toMutableList()),
+            Routine("2", "루틴 2", listOf(Exercise("운동 2", 4, 12.5, 8)).toMutableList()),
             // 추가 루틴...
         )
         routineAdapter.updateData(routines)
