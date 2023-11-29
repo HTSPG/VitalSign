@@ -1,5 +1,6 @@
 package com.example.vitalsign
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -53,6 +54,13 @@ class MainActivity : AppCompatActivity() {
     fun setTabDotColor(tab: TabLayout.Tab, isActive: Boolean) {
         val color = if (isActive) R.color.accent else R.color.normal
         tab.customView?.findViewById<View>(R.id.dotView)?.setBackgroundResource(color)
+    }
+
+    private fun onRoutineClicked(routine: Routine) {
+        // TODO: 루틴 아이템 클릭 시 루틴 시작 화면으로 이동
+        val intent = Intent(this, RoutineDetailActivity::class.java)
+        intent.putExtra("ROUTINE_ID", routine)
+        startActivity(intent)
     }
 }
 
