@@ -35,6 +35,7 @@ class RoutineEditActivity : AppCompatActivity() {
         val btnAddExercise = findViewById<Button>(R.id.btnAddExercise)
         btnAddExercise.setOnClickListener {
             // TODO: 운동 추가 로직
+
         }
     }
 }
