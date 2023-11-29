@@ -17,14 +17,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:inputType="numberDecimal"/>
+        android:inputType="numberDecimal"
+        android:hint="KG"/>
 
     <EditText
         android:id="@+id/editRepetitions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:hint="횟수"/>
 
     <CheckBox
         android:id="@+id/checkBoxCompleted"

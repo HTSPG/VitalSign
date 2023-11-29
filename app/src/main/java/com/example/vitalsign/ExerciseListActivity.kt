@@ -7,6 +7,7 @@ import android.content.Intent
 import com.example.vitalsign.R
 import com.example.vitalsign.Exercise
 
+//운동 목록 화면
 class ExerciseListActivity : AppCompatActivity() {
 
     private lateinit var exerciseRecyclerView: RecyclerView

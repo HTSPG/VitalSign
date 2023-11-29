@@ -1,5 +1,6 @@
 package com.example.vitalsign
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -34,8 +35,9 @@ class RoutineEditActivity : AppCompatActivity() {
 
         val btnAddExercise = findViewById<Button>(R.id.btnAddExercise)
         btnAddExercise.setOnClickListener {
-            // TODO: 운동 추가 로직
-
+            // 운동 목록 화면으로 이동
+            val intent = Intent(this, ExerciseListActivity::class.java)
+            startActivity(intent)
         }
     }
 }
