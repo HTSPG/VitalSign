@@ -42,11 +42,26 @@ class RoutineEditActivity : AppCompatActivity() {
         }
 
         exercisesRecyclerView = findViewById(R.id.rvExercises)
-        exercisesAdapter = ExercisesEditAdapter(routine?.exercises?.toMutableList() ?: mutableListOf()) { position ->
-            // 운동 삭제 로직
-            routine?.exercises?.removeAt(position)
-            exercisesAdapter.notifyItemRemoved(position)
-        }
+
+        //아이템 간격
+        val spaceInPixels = 30 // 픽셀 단위
+        exercisesRecyclerView.addItemDecoration(SpacesItemDecoration(spaceInPixels))
+
+        exercisesAdapter = ExercisesEditAdapter(routine?.exercises?.toMutableList() ?: mutableListOf(),
+            onDeleteClicked = { position ->
+                // 운동 삭제 로직
+                routine?.exercises?.let {
+                    it.removeAt(position)
+                    exercisesAdapter.notifyItemRemoved(position)
+                    exercisesAdapter.notifyItemRangeChanged(position, it.size)
+                }
+            },
+            onAddButtonClicked = {
+                // '+ 운동 추가' 버튼을 클릭할 때의 로직
+                val intent = Intent(this, ExerciseListActivity::class.java)
+                startActivity(intent)
+            }
+        )
         exercisesRecyclerView.layoutManager = LinearLayoutManager(this)
         exercisesRecyclerView.adapter = exercisesAdapter
 

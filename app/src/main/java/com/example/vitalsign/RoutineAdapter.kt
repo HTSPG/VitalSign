@@ -61,7 +61,7 @@ class RoutineAdapter(
     ) : RecyclerView.ViewHolder(itemView) {
 
         private val nameTextView: TextView = itemView.findViewById(R.id.tvRoutineName)
-        private val imageView: ImageView = itemView.findViewById(R.id.menuBtn) // 이미지 뷰 ID 추가
+        private val imageView: ImageView = itemView.findViewById(R.id.menuBtn)
 
         fun bind(routine: Routine) {
             nameTextView.text = routine.name
