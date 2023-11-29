@@ -1,5 +1,6 @@
 package com.example.vitalsign
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -48,6 +49,11 @@ class RoutineEditActivity : AppCompatActivity() {
         exercisesRecyclerView.layoutManager = LinearLayoutManager(this)
         exercisesRecyclerView.adapter = exercisesAdapter
 
-
+        val btnAddExercise = findViewById<Button>(R.id.btnAddExercise)
+        btnAddExercise.setOnClickListener {
+            // 운동 목록 화면으로 이동
+            val intent = Intent(this, ExerciseListActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

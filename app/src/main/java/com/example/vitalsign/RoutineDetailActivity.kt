@@ -34,6 +34,11 @@ class RoutineDetailActivity : AppCompatActivity() {
         // 루틴 시작 버튼 클릭 리스너
         btnStartRoutine.setOnClickListener {
             // TODO: 운동 기록 화면으로 이동
+            btnStartRoutine.setOnClickListener {
+                // 운동 기록 화면으로 이동
+                val intent = Intent(this, ExerciseRecordActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         // 루틴 편집 버튼 클릭 리스너
