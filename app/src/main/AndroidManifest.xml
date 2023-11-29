@@ -29,7 +29,6 @@
         <activity android:name=".RoutineDetailActivity"></activity>
         <activity android:name=".ExerciseEditActivity"></activity>
         <activity android:name=".ExerciseListActivity"></activity>
-        <activity android:name=".ExerciseRecordActivity"></activity>
     </application>
 
 </manifest>

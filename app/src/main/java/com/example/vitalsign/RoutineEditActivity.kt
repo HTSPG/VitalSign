@@ -22,16 +22,15 @@ class RoutineEditActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_routine_edit)
-
         binding = ActivityRoutineEditBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         binding.cancelERBtn.setOnClickListener {
-            Log.i("RoutineEditActivity", "cancelERBtn 클릭됨")
             onBackPressed()
             this.finish()
         }
 
-        binding.subnitERBtn.setOnClickListener {
+        binding.submitERBtn.setOnClickListener {
             //루틴 변경하는 기능 구현 필
         }
 
@@ -49,11 +48,13 @@ class RoutineEditActivity : AppCompatActivity() {
         exercisesRecyclerView.layoutManager = LinearLayoutManager(this)
         exercisesRecyclerView.adapter = exercisesAdapter
 
-        val btnAddExercise = findViewById<Button>(R.id.btnAddExercise)
-        btnAddExercise.setOnClickListener {
-            // 운동 목록 화면으로 이동
-            val intent = Intent(this, ExerciseListActivity::class.java)
-            startActivity(intent)
-        }
+
+        //운동 목록 화면으로 이동하는 버튼 다른 것으로 대체
+//        val btnAddExercise = findViewById<Button>(R.id.btnAddExercise)
+//        btnAddExercise.setOnClickListener {
+//            // 운동 목록 화면으로 이동
+//            val intent = Intent(this, ExerciseListActivity::class.java)
+//            startActivity(intent)
+//        }
     }
 }
