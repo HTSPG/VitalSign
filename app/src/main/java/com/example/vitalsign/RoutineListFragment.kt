@@ -47,7 +47,7 @@ class RoutineListFragment : Fragment() {
             routines,
             onItemClicked = { routine ->
                 // 루틴 아이템을 클릭하면 루틴 상세 화면으로 이동합니다.
-                val intent = Intent(activity, RoutineEditActivity::class.java)
+                val intent = Intent(activity, RoutineDetailActivity::class.java)
                 intent.putExtra("ROUTINE_DATA", routine)
                 startActivity(intent)
             },
@@ -63,11 +63,11 @@ class RoutineListFragment : Fragment() {
         // 데이터 로드 및 어댑터 업데이트
         loadRoutines()
 
-        // 루틴 추가 버튼 클릭 리스너 설정
-        val btnAddRoutine = view.findViewById<Button>(R.id.btnAddRoutine)
-        btnAddRoutine.setOnClickListener {
-            // TODO: 루틴 추가 화면으로 이동하거나 루틴 추가 로직 구현
-        }
+//        // 루틴 추가 버튼 클릭 리스너 설정
+//        val btnAddRoutine = view.findViewById<Button>(R.id.btnAddRoutine)
+//        btnAddRoutine.setOnClickListener {
+//            // TODO: 루틴 추가 화면으로 이동하거나 루틴 추가 로직 구현
+//        }
     }
 
     private fun loadRoutines() {
@@ -77,7 +77,7 @@ class RoutineListFragment : Fragment() {
             Routine("2", "Routine 2", "", mutableListOf(Exercise("Exercise 2", 4, 12.5, 8)))
             // 추가 루틴...
         )
-        // routineAdapter.updateData(routines)
+         routineAdapter.updateData(routines)
         // TODO: 루틴 데이터 로딩 로직 구현
     }
 

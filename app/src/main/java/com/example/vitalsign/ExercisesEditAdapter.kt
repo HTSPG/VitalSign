@@ -8,7 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class ExercisesEditAdapter(
-    private var exercises: MutableList<Exercise>,
+//    private var exercises: MutableList<Exercise>,
+    private var exercises: List<Exercise>,
     private val onDeleteClicked: (Int) -> Unit
 ) : RecyclerView.Adapter<ExercisesEditAdapter.ExerciseViewHolder>() {
 

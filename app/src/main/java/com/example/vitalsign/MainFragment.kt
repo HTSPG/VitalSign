@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.viewpager2.widget.ViewPager2
 import com.example.vitalsign.Exercise
 import com.example.vitalsign.R
 import com.example.vitalsign.Routine
@@ -46,11 +47,15 @@ class MainFragment : Fragment() {
         val spaceInPixels = 30 // 픽셀 단위
         recentRoutineRecyclerView.addItemDecoration(SpacesItemDecoration(spaceInPixels))
 
+        //뷰페이저
+        val viewPager = activity?.findViewById<ViewPager2>(R.id.viewPager)
+
         // '내 루틴' 버튼 클릭 이벤트 설정
         val myRoutineButton = view.findViewById<Button>(R.id.btnMyRoutine)
         myRoutineButton.setOnClickListener {
-            val intent = Intent(activity, RoutineListActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(activity, RoutineListActivity::class.java)
+//            startActivity(intent)
+            viewPager?.setCurrentItem(1, true)
         }
 
         // 데이터 로딩
@@ -74,7 +79,7 @@ class MainFragment : Fragment() {
     private fun onRoutineClicked(routine: Routine) {
         // TODO: 루틴 아이템 클릭 시 루틴 시작 화면으로 이동
         val intent = Intent(activity, RoutineDetailActivity::class.java)
-        intent.putExtra("ROUTINE_ID", routine.id)
+        intent.putExtra("ROUTINE_ID", routine)
         startActivity(intent)
     }
 }

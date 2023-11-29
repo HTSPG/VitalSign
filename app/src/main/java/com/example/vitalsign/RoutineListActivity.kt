@@ -42,10 +42,10 @@ class RoutineListActivity : AppCompatActivity() {
         loadRoutines()
 
         // 루틴 추가 버튼 클릭 리스너 설정
-        val btnAddRoutine = findViewById<Button>(R.id.btnAddRoutine)
-        btnAddRoutine.setOnClickListener {
-            // TODO: 루틴 추가 화면으로 이동 또는 루틴 추가 로직 구현
-        }
+//        val btnAddRoutine = findViewById<Button>(R.id.btnAddRoutine)
+//        btnAddRoutine.setOnClickListener {
+//            // TODO: 루틴 추가 화면으로 이동 또는 루틴 추가 로직 구현
+//        }
     }
 
     private fun loadRoutines() {

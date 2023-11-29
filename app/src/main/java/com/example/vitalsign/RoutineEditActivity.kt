@@ -4,11 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.vitalsign.databinding.ActivityMainBinding
 import com.example.vitalsign.databinding.ActivityRoutineEditBinding
 
 //루틴 편집 화면
@@ -16,7 +16,6 @@ class RoutineEditActivity : AppCompatActivity() {
 
     private lateinit var exercisesRecyclerView: RecyclerView
     private lateinit var exercisesAdapter: ExercisesEditAdapter
-    private var routine: Routine? = null
 
     private lateinit var binding: ActivityRoutineEditBinding
 
@@ -24,6 +23,14 @@ class RoutineEditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRoutineEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // 인텐트에서 루틴 데이터 가져오기
+        val routine = intent.getSerializableExtra("ROUTINE_DATA") as? Routine
+        binding.tvRoutineName.setText(routine?.name)
+
+//        exercisesAdapter = ExercisesEditAdapter(routine?.exercises ?: emptyList(),
+//            onDeleteClicked = )
+
 
         binding.cancelERBtn.setOnClickListener {
             onBackPressed()
@@ -33,11 +40,6 @@ class RoutineEditActivity : AppCompatActivity() {
         binding.submitERBtn.setOnClickListener {
             //루틴 변경하는 기능 구현 필
         }
-
-        routine = intent.getSerializableExtra("ROUTINE_DATA") as? Routine
-
-        val tvRoutineName = findViewById<TextView>(R.id.tvRoutineName)
-        tvRoutineName.text = routine?.name
 
         exercisesRecyclerView = findViewById(R.id.rvExercises)
         exercisesAdapter = ExercisesEditAdapter(routine?.exercises?.toMutableList() ?: mutableListOf()) { position ->

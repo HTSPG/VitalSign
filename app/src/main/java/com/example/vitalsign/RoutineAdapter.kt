@@ -1,10 +1,18 @@
+import android.app.AlertDialog
+import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vitalsign.R
 import com.example.vitalsign.Routine
+import com.example.vitalsign.RoutineDetailActivity
+import com.example.vitalsign.RoutineEditActivity
 
 class RoutineAdapter(
     private var routines: List<Routine>,
@@ -53,10 +61,41 @@ class RoutineAdapter(
     ) : RecyclerView.ViewHolder(itemView) {
 
         private val nameTextView: TextView = itemView.findViewById(R.id.tvRoutineName)
+        private val imageView: ImageView = itemView.findViewById(R.id.menuBtn) // 이미지 뷰 ID 추가
 
         fun bind(routine: Routine) {
             nameTextView.text = routine.name
             itemView.setOnClickListener { onItemClicked(routine) }
+            imageView.setOnClickListener {
+                onImageClicked(routine)
+            }
+        }
+
+        private fun onImageClicked(routine: Routine) {
+            val context = itemView.context
+            val dialog = AlertDialog.Builder(context)
+                .setTitle("루틴 설정")
+                .setMessage("원하는 동작을 선택하세요.")
+                .setPositiveButton("루틴 시작") { _, _ ->
+                    val intent = Intent(context, RoutineDetailActivity::class.java)
+                    intent.putExtra("ROUTINE_DATA", routine)
+                    context.startActivity(intent)
+                }
+                .setNegativeButton("루틴 편집") { _, _ ->
+                    val intent = Intent(context, RoutineEditActivity::class.java)
+                    intent.putExtra("ROUTINE_DATA", routine)
+                    context.startActivity(intent)
+                }
+                .setNeutralButton("취소", null)
+                .create()
+            dialog.show()
+            dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(Color.RED)
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(
+                ContextCompat.getColor(context, R.color.accent)
+            )
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(
+                ContextCompat.getColor(context, R.color.dialNormal)
+            )
         }
     }
 
@@ -74,4 +113,5 @@ class RoutineAdapter(
         private const val VIEW_TYPE_ITEM = 0
         private const val VIEW_TYPE_BUTTON = 1
     }
+
 }
