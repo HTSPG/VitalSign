@@ -15,6 +15,7 @@ class ExerciseEditActivity : AppCompatActivity() {
     private lateinit var tvRestTime: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // TODO: 운동 편집 화면 인텐트 처리 필요
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise_edit)
 
@@ -60,6 +61,6 @@ class ExerciseEditActivity : AppCompatActivity() {
     private fun adjustRestTime(amount: Int) {
         val currentRest = tvRestTime.text.toString().substringAfter(": ").toIntOrNull() ?: 60
         val newRest = (currentRest + amount).coerceAtLeast(0)
-        tvRestTime.text = "휴식 시간: $newRest 초"
+        tvRestTime.text = "$newRest 초"
     }
 }

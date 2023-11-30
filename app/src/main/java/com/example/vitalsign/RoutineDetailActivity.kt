@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.vitalsign.data.Routine
 
 //루틴 시작화면
 class RoutineDetailActivity : AppCompatActivity() {
@@ -28,6 +29,12 @@ class RoutineDetailActivity : AppCompatActivity() {
         // 운동 목록 RecyclerView 설정
         exercisesRecyclerView = findViewById(R.id.rvExercises)
         exercisesAdapter = ExercisesAdapter(routine?.exercises ?: emptyList())
+
+        //아이템 간격
+        val spaceInPixels = 30 // 픽셀 단위
+        exercisesRecyclerView.addItemDecoration(SpacesItemDecoration(spaceInPixels))
+
+
         exercisesRecyclerView.layoutManager = LinearLayoutManager(this)
         exercisesRecyclerView.adapter = exercisesAdapter
 

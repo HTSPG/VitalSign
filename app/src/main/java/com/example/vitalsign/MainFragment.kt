@@ -11,10 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.viewpager2.widget.ViewPager2
-import com.example.vitalsign.Exercise
 import com.example.vitalsign.R
-import com.example.vitalsign.Routine
 import com.example.vitalsign.RoutineDetailActivity
+import com.example.vitalsign.data.Exercise
+import com.example.vitalsign.data.Routine
 
 class MainFragment : Fragment() {
     private lateinit var recentRoutineRecyclerView: RecyclerView
@@ -69,17 +69,18 @@ class MainFragment : Fragment() {
     private fun loadRecentRoutines() {
         // TODO: 최근 루틴 데이터 로딩 로직 (최대 3개)
         // 예시 데이터 로딩
-        recentRoutines = listOf(Routine(
-            "1",
-            "상체 루틴",
-            "",
-            mutableListOf(
-                Exercise("벤치 프레스", 4, 75.0, 10),
-                Exercise("덤벨 플라이", 3, 20.0, 12),
-                Exercise("랫 풀 다운", 4, 60.0, 10),
-                Exercise("숄더 프레스", 4, 50.0, 10),
-                Exercise("바이셉스 컬", 3, 15.0, 12)
-            )
+        recentRoutines = listOf(
+            Routine(
+                "1",
+                "상체 루틴",
+                "",
+                mutableListOf(
+                    Exercise("벤치 프레스", 4, 75.0, 10),
+                    Exercise("덤벨 플라이", 3, 20.0, 12),
+                    Exercise("랫 풀 다운", 4, 60.0, 10),
+                    Exercise("숄더 프레스", 4, 50.0, 10),
+                    Exercise("바이셉스 컬", 3, 15.0, 12)
+                )
         ),
             Routine(
                 "2",
@@ -111,7 +112,7 @@ class MainFragment : Fragment() {
     private fun onRoutineClicked(routine: Routine) {
         // TODO: 루틴 아이템 클릭 시 루틴 시작 화면으로 이동
         val intent = Intent(activity, RoutineDetailActivity::class.java)
-        intent.putExtra("ROUTINE_ID", routine)
+        intent.putExtra("ROUTINE_DATA", routine)
         startActivity(intent)
     }
 }

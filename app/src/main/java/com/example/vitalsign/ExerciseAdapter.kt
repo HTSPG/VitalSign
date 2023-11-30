@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vitalsign.R
+import com.example.vitalsign.data.Exercise
 
 class ExerciseAdapter(
     private val exercises: List<Exercise>,

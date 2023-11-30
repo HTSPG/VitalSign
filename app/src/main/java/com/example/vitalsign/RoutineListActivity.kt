@@ -6,9 +6,9 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.vitalsign.Exercise
+import com.example.vitalsign.data.Exercise
 import com.example.vitalsign.R
-import com.example.vitalsign.Routine
+import com.example.vitalsign.data.Routine
 import com.example.vitalsign.RoutineDetailActivity
 import com.example.vitalsign.RoutineEditActivity
 

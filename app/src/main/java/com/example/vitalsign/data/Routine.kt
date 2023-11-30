@@ -1,5 +1,6 @@
-package com.example.vitalsign
+package com.example.vitalsign.data
 
+import com.example.vitalsign.data.Exercise
 import java.io.Serializable
 
 data class Routine(

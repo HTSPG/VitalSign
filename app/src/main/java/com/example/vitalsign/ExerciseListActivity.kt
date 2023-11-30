@@ -4,8 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.content.Intent
-import com.example.vitalsign.R
-import com.example.vitalsign.Exercise
+import com.example.vitalsign.data.Exercise
 
 //운동 목록 화면
 class ExerciseListActivity : AppCompatActivity() {

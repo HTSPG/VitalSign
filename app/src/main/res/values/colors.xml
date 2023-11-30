@@ -6,4 +6,6 @@
     <color name="normal">#FF1E1E1E</color>
     <color name="itemDefault">#E6E6E6</color>
     <color name="dialNormal">#424242</color>
+    <color name="timer_background">#F0F9FF</color>
+    <color name="timer_text">#0D99FF</color>
 </resources>

@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.content.Intent
 import android.widget.Button
-import com.example.vitalsign.Exercise
+import com.example.vitalsign.data.Exercise
 import com.example.vitalsign.R
-import com.example.vitalsign.Routine
+import com.example.vitalsign.data.Routine
 import com.example.vitalsign.RoutineDetailActivity
 
 //메인 화면

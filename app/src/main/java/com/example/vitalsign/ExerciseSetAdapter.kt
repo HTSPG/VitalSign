@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.vitalsign.R
+import com.example.vitalsign.data.ExerciseSet
 
 class ExerciseSetAdapter(private var dataSet: MutableList<ExerciseSet>) :
     RecyclerView.Adapter<ExerciseSetAdapter.ViewHolder>() {

@@ -13,16 +13,20 @@
         android:textSize="24sp"/>
 
     <ImageView
+        android:layout_margin="5dp"
         android:id="@+id/imgExercise"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:src="@drawable/ic_launcher_foreground"
         android:scaleType="centerCrop"/>
+
     <TextView
         android:id="@+id/exerciseTitle"
+        android:text="운동 이름"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,35 +34,40 @@
         android:layout_marginTop="8dp">
         <TextView
             android:text="세트"
+            android:textStyle="bold"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"/>
 
         <TextView
             android:text="KG"
+            android:textStyle="bold"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"/>
 
         <TextView
             android:text="횟수"
+            android:textStyle="bold"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"/>
 
         <TextView
             android:text="완료"
+            android:textStyle="bold"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"/>
     </LinearLayout>
 
     <!-- 운동 세트 RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="16dp"
         android:id="@+id/recyclerViewExerciseSets"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -67,60 +76,121 @@
     <!-- 세트 추가/삭제, 다음 운동 버튼 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:gravity="center"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
 
         <Button
             android:id="@+id/btnAddSet"
+            android:backgroundTint="#D1ECFF"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:autoSizeTextType="uniform"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="세트 추가"/>
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:text="+ 세트 추가"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"/>
 
         <Button
             android:id="@+id/btnRemoveSet"
+            android:backgroundTint="#D1ECFF"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="세트 삭제"/>
+            android:layout_height="match_parent"
+            android:autoSizeTextType="uniform"
+            android:layout_weight="5"
+            android:text="- 세트 삭제"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"/>
 
         <Button
             android:id="@+id/btnNextExercise"
+            android:autoSizeTextType="uniform"
+            android:backgroundTint="#D1ECFF"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="다음 운동"/>
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:text="다음 운동→"/>
     </LinearLayout>
 
     <!-- 휴식 시간 및 리셋 버튼 -->
     <LinearLayout
+        android:background="@drawable/timer_background"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:gravity="bottom"
+        android:padding="10dp"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
 
-        <TextView
-            android:id="@+id/tvRestTime"
+        <LinearLayout
+            android:layout_marginStart="10dp"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="휴식 시간: 60초"/>
+            android:layout_weight="13"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <TextView
+                android:textColor="@color/timer_text"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:autoSizeTextType="uniform"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="휴식 시간"/>
+            <TextView
+                android:id="@+id/tvRestTime"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:autoSizeTextType="uniform"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:text="60초"/>
+
+        </LinearLayout>
 
         <Button
+            android:textColor="@color/timer_text"
             android:id="@+id/btnIncreaseRest"
-            android:layout_width="wrap_content"
+            android:backgroundTint="@color/timer_background"
+            android:layout_width="0dp"
+            android:layout_weight="10"
             android:layout_height="wrap_content"
+            android:autoSizeTextType="uniform"
             android:text="+10"/>
 
         <Button
+            android:textColor="@color/timer_text"
             android:id="@+id/btnDecreaseRest"
-            android:layout_width="wrap_content"
+            android:backgroundTint="@color/timer_background"
+            android:layout_width="0dp"
+            android:layout_weight="10"
             android:layout_height="wrap_content"
+            android:autoSizeTextType="uniform"
             android:text="-10"/>
 
         <Button
             android:id="@+id/btnReset"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:backgroundTint="@color/timer_background"
+            android:textColor="#757575"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_weight="10"
+            android:layout_height="match_parent"
+            android:autoSizeTextType="uniform"
             android:text="리셋"/>
     </LinearLayout>
 </LinearLayout>

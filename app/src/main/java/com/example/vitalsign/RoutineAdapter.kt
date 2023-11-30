@@ -10,9 +10,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vitalsign.R
-import com.example.vitalsign.Routine
 import com.example.vitalsign.RoutineDetailActivity
 import com.example.vitalsign.RoutineEditActivity
+import com.example.vitalsign.data.Routine
 
 class RoutineAdapter(
     private var routines: List<Routine>,
@@ -76,7 +76,7 @@ class RoutineAdapter(
             val dialog = AlertDialog.Builder(context)
                 .setTitle("루틴 설정")
                 .setMessage("원하는 동작을 선택하세요.")
-                .setPositiveButton("루틴 시작") { _, _ ->
+                .setPositiveButton("루틴 선택") { _, _ ->
                     val intent = Intent(context, RoutineDetailActivity::class.java)
                     intent.putExtra("ROUTINE_DATA", routine)
                     context.startActivity(intent)

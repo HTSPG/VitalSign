@@ -3,6 +3,7 @@ package com.example.vitalsign
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.vitalsign.data.Exercise
 
 class ExercisesEditAdapter(
 //    private var exercises: MutableList<Exercise>,
@@ -37,9 +40,6 @@ class ExercisesEditAdapter(
             }
             else -> throw IllegalArgumentException("Invalid view type")
         }
-//        val view = LayoutInflater.from(parent.context)
-//            .inflate(R.layout.item_exercise_edit, parent, false)
-//        return ExerciseViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -73,16 +73,17 @@ class ExercisesEditAdapter(
                     onDeleteClicked(position)
                 }
                 .setNegativeButton("운동 편집") { _, _ ->
-//                    TODO: 운동 데이터를 인텐트에 담아서 운동 편집 화면으로 이동하는 기능 구현 필요/운동 편집 화면에서도 인텐트 처리 필요
-//                    val intent = Intent(context, RoutineEditActivity::class.java)
-//                    intent.putExtra("ROUTINE_DATA", exercise)
-//                    context.startActivity(intent)
+                    val intent = Intent(context, ExerciseEditActivity::class.java)
+                    intent.putExtra("EXERCISE_DATA", exercise)
+                    context.startActivity(intent)
                 }
                 .setNeutralButton("취소", null)
                 .create()
             dialog.show()
             dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(Color.RED)
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(
+            val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            positiveButton.setTypeface(positiveButton.typeface, Typeface.BOLD)
+            positiveButton.setTextColor(
                 ContextCompat.getColor(context, R.color.normal)
             )
             dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(

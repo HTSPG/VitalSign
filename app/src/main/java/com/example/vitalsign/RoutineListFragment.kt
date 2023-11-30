@@ -6,15 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.vitalsign.Exercise
-import com.example.vitalsign.R
-import com.example.vitalsign.Routine
-import com.example.vitalsign.RoutineDetailActivity
-import com.example.vitalsign.RoutineEditActivity
+import com.example.vitalsign.data.Exercise
+import com.example.vitalsign.data.Routine
+
 
 class RoutineListFragment : Fragment() {
     private lateinit var routineRecyclerView: RecyclerView
@@ -73,7 +70,7 @@ class RoutineListFragment : Fragment() {
     private fun loadRoutines() {
         // 예시 데이터 로딩
         val routines = listOf(
-            Routine("1", "Routine 1", "", mutableListOf(Exercise("Exercise 1", 3, 10.0, 10))),
+            Routine("1", "Routine 1", "", mutableListOf(Exercise("Exercise 1", 3, 10.0, 10), Exercise("Exercise 3", 3, 10.0, 10))),
             Routine("2", "Routine 2", "", mutableListOf(Exercise("Exercise 2", 4, 12.5, 8)))
             // 추가 루틴...
         )

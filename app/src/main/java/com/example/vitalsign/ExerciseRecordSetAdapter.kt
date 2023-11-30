@@ -7,7 +7,8 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import org.w3c.dom.Text
+import com.example.vitalsign.data.ExerciseSet
+
 
 class ExerciseRecordSetAdapter(private var dataSet: MutableList<ExerciseSet>) :
     RecyclerView.Adapter<ExerciseRecordSetAdapter.ViewHolder>() {

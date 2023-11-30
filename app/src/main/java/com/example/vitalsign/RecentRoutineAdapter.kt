@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vitalsign.R
-import com.example.vitalsign.Routine
+import com.example.vitalsign.data.Routine
 
 class RecentRoutineAdapter(
     private var routines: List<Routine>,

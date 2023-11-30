@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="50dp"
+    android:background="@drawable/item_background"
+    android:gravity="center"
     android:orientation="horizontal"
     android:padding="8dp">
 
     <TextView
         android:id="@+id/tvExerciseName"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:textStyle="bold"
+        android:layout_weight="3"
         android:text="운동 이름"
-        android:textSize="16sp"/>
+        android:autoSizeTextType="uniform" />
 
     <TextView
         android:id="@+id/tvExerciseSets"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="세트 수"
         android:textSize="14sp"
@@ -25,7 +29,7 @@
     <TextView
         android:id="@+id/tvExerciseWeight"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="중량"
         android:textSize="14sp"
@@ -34,7 +38,7 @@
     <TextView
         android:id="@+id/tvExerciseRepetitions"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="횟수"
         android:textSize="14sp"

@@ -16,6 +16,7 @@
         android:text="Vital Sign"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="@color/accent"
         android:layout_marginBottom="7dp"/>
 
     <!-- 운동 기록 그래프 -->
@@ -70,6 +71,9 @@
 
         <Button
             android:id="@+id/btnMyRoutine"
+            android:backgroundTint="#D1ECFF"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="나의 루틴 →" />

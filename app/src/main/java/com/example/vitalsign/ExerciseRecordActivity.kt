@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
 import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.vitalsign.R
+import com.example.vitalsign.data.Exercise
+import com.example.vitalsign.data.ExerciseSet
+import com.example.vitalsign.data.Routine
 
 //운동 기록 화면
 class ExerciseRecordActivity : AppCompatActivity() {
@@ -95,7 +95,7 @@ class ExerciseRecordActivity : AppCompatActivity() {
             override fun run() {
                 if (restTimeInSeconds > 0) {
                     restTimeInSeconds--
-                    tvRestTime.text = "휴식 시간: ${restTimeInSeconds}초"
+                    tvRestTime.text = "${restTimeInSeconds}초"
                     restTimerHandler.postDelayed(this, 1000)
                 }
             }
@@ -104,7 +104,7 @@ class ExerciseRecordActivity : AppCompatActivity() {
 
     private fun adjustRestTime(amount: Int) {
         restTimeInSeconds = (restTimeInSeconds + amount).coerceAtLeast(0)
-        tvRestTime.text = "휴식 시간: ${restTimeInSeconds}초"
+        tvRestTime.text = "${restTimeInSeconds}초"
     }
 
     private fun resetTimer() {

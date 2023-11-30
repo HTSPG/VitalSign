@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.vitalsign.data.Exercise
 
 class ExercisesAdapter(
     private val exercises: List<Exercise>
@@ -31,9 +32,9 @@ class ExercisesAdapter(
 
         fun bind(exercise: Exercise) {
             nameTextView.text = exercise.name
-            setsTextView.text = "세트: ${exercise.sets}"
-            weightTextView.text = "중량: ${exercise.weight}kg"
-            repetitionsTextView.text = "횟수: ${exercise.repetitions}"
+            setsTextView.text = "${exercise.sets}"
+            weightTextView.text = "${exercise.weight}kg"
+            repetitionsTextView.text = "${exercise.repetitions}"
         }
     }
 }

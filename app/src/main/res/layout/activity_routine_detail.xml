@@ -14,6 +14,43 @@
         android:textSize="24sp"
         android:gravity="center"
         android:layout_marginBottom="16dp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:paddingEnd="12dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:gravity="center"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:autoSizeTextType="uniform"
+            android:text="운동이름"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:autoSizeTextType="uniform"
+            android:text="세트"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:text="중량"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:text="횟수"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
 
     <!-- 루틴 내의 운동 목록 RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
@@ -28,19 +65,38 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center">
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
 
         <!-- 루틴 시작 버튼 -->
         <Button
+            android:layout_weight="4"
             android:id="@+id/btnStartRoutine"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:backgroundTint="@color/accent"
             android:layout_height="wrap_content"
-            android:text="루틴 시작" />
+            android:autoSizeTextType="uniform"
+            android:textStyle="bold"
+            android:text="루틴 시작!" />
+        <View
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
 
         <!-- 루틴 편집 버튼 -->
         <Button
+            android:layout_weight="4"
             android:id="@+id/btnEditRoutine"
-            android:layout_width="wrap_content"
+            android:backgroundTint="#80808080"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:autoSizeTextType="uniform"
             android:text="루틴 편집" />
+        <View
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
     </LinearLayout>
 </LinearLayout>

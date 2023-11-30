@@ -9,17 +9,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 //class MyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 class MyPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
 
-//    override fun getCount(): Int {
-//        return 2 // 페이지 수
-//    }
-//
-//    override fun getItem(position: Int): Fragment {
-//        return when (position) {
-//            0 -> MainFragment() // 메인 화면 프래그먼트
-//            1 -> RoutineListFragment() // 루틴 리스트 화면 프래그먼트
-//            else -> Fragment()
-//        }
-//    }
     override fun getItemCount(): Int {
         return 2 // 페이지 수
     }
