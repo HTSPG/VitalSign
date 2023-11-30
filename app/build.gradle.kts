@@ -11,6 +11,10 @@ android {
         viewBinding = true
     }
 
+    dataBinding {
+        enable = true
+    }
+
     defaultConfig {
         applicationId = "com.example.vitalsign"
         minSdk = 24

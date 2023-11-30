@@ -7,6 +7,7 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import org.w3c.dom.Text
 
 class ExerciseRecordSetAdapter(private var dataSet: MutableList<ExerciseSet>) :
     RecyclerView.Adapter<ExerciseRecordSetAdapter.ViewHolder>() {
@@ -34,6 +35,26 @@ class ExerciseRecordSetAdapter(private var dataSet: MutableList<ExerciseSet>) :
         holder.completedCheckBox.setOnCheckedChangeListener { _, isChecked ->
             set.isCompleted = isChecked
         }
+    }
+
+    fun addSet() {
+        val nextSetNumber = if (dataSet.isEmpty()) 1 else dataSet.last().setNumber + 1
+        dataSet.add(ExerciseSet(nextSetNumber, 0.0, 0))
+        notifyItemInserted(dataSet.size - 1)
+    }
+
+    fun removeSet() {
+        if (dataSet.isNotEmpty()) {
+            val lastIndex = dataSet.size - 1
+            dataSet.removeAt(lastIndex)
+            notifyItemRemoved(lastIndex)
+        }
+    }
+
+    // 새로운 세트 데이터를 설정하는 메서드
+    fun setData(newData: MutableList<ExerciseSet>) {
+        dataSet = newData
+        notifyDataSetChanged() // 데이터가 변경되었음을 알리고 UI를 갱신
     }
 
     override fun getItemCount() = dataSet.size

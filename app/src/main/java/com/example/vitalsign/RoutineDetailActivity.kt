@@ -33,11 +33,12 @@ class RoutineDetailActivity : AppCompatActivity() {
 
         // 루틴 시작 버튼 클릭 리스너
         btnStartRoutine.setOnClickListener {
-            // TODO: 운동 기록 화면으로 이동
-            btnStartRoutine.setOnClickListener {
-                // 운동 기록 화면으로 이동
-                val intent = Intent(this, ExerciseRecordActivity::class.java)
-                startActivity(intent)
+            // 인텐트에서 현재 루틴 데이터 가져오기
+            val routine = intent.getSerializableExtra("ROUTINE_DATA") as? Routine
+            routine?.let {
+                val recordIntent = Intent(this, ExerciseRecordActivity::class.java)
+                recordIntent.putExtra("ROUTINE_DATA", it)
+                startActivity(recordIntent)
             }
         }
 

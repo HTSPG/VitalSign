@@ -69,10 +69,42 @@ class MainFragment : Fragment() {
     private fun loadRecentRoutines() {
         // TODO: 최근 루틴 데이터 로딩 로직 (최대 3개)
         // 예시 데이터 로딩
-        recentRoutines = listOf(
-            Routine("1", "Routine 1", "", mutableListOf(Exercise("Exercise 1", 3, 10.0, 10))),
-            Routine("2", "Routine 2", "", mutableListOf(Exercise("Exercise 2", 4, 12.5, 8)))
-        )
+        recentRoutines = listOf(Routine(
+            "1",
+            "상체 루틴",
+            "",
+            mutableListOf(
+                Exercise("벤치 프레스", 4, 75.0, 10),
+                Exercise("덤벨 플라이", 3, 20.0, 12),
+                Exercise("랫 풀 다운", 4, 60.0, 10),
+                Exercise("숄더 프레스", 4, 50.0, 10),
+                Exercise("바이셉스 컬", 3, 15.0, 12)
+            )
+        ),
+            Routine(
+                "2",
+                "하체 루틴",
+                "",
+                mutableListOf(
+                    Exercise("스쿼트", 4, 100.0, 10),
+                    Exercise("데드리프트", 3, 120.0, 8),
+                    Exercise("레그 프레스", 4, 150.0, 10),
+                    Exercise("레그 컬", 3, 40.0, 12),
+                    Exercise("캐프 레이즈", 4, 30.0, 15)
+                )
+            ),
+            Routine(
+                "3",
+                "전신 루틴",
+                "",
+                mutableListOf(
+                    Exercise("풀업", 3, 0.0, 10),
+                    Exercise("푸시업", 4, 0.0, 15),
+                    Exercise("런지", 3, 20.0, 12),
+                    Exercise("플랭크", 3, 0.0, 60), // 시간은 초 단위
+                    Exercise("버피 테스트", 2, 0.0, 15)
+                )
+            ))
         recentRoutineAdapter.updateData(recentRoutines)
     }
 
