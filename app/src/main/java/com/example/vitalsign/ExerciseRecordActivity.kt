@@ -2,6 +2,7 @@ package com.example.vitalsign
 
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -20,6 +21,8 @@ class ExerciseRecordActivity : AppCompatActivity() {
     private lateinit var setRecyclerView: RecyclerView
     private lateinit var setAdapter: ExerciseRecordSetAdapter
     private lateinit var tvRestTime: TextView
+    private lateinit var restTimerHandler: Handler
+    private lateinit var restTimerRunnable: Runnable
     private var restTimeInSeconds = 60
     private var timer: CountDownTimer? = null
     private var currentExerciseIndex = 0 // 현재 운동 인덱스
@@ -77,8 +80,26 @@ class ExerciseRecordActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnNextExercise).setOnClickListener {
             moveToNextExercise()
         }
-
+        setupRestTimer()
+        findViewById<Button>(R.id.btnReset).setOnClickListener {
+            restTimeInSeconds = 60 // 휴식 시간을 초기값(예: 60초)으로 재설정
+            restTimerHandler.removeCallbacks(restTimerRunnable)
+            restTimerHandler.post(restTimerRunnable)
+        }
         startTimer()
+    }
+
+    private fun setupRestTimer() {
+        restTimerHandler = Handler()
+        restTimerRunnable = object : Runnable {
+            override fun run() {
+                if (restTimeInSeconds > 0) {
+                    restTimeInSeconds--
+                    tvRestTime.text = "휴식 시간: ${restTimeInSeconds}초"
+                    restTimerHandler.postDelayed(this, 1000)
+                }
+            }
+        }
     }
 
     private fun adjustRestTime(amount: Int) {
@@ -91,22 +112,34 @@ class ExerciseRecordActivity : AppCompatActivity() {
         startTimer()
     }
 
-    private fun startTimer() {
-        tvTimer.text = "00:00"
-        // 여기에 타이머 로직 구현
-        // 예: 1분 타이머
-        timer = object : CountDownTimer(60000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                val minutes = (millisUntilFinished / 1000) / 60
-                val seconds = (millisUntilFinished / 1000) % 60
-                tvTimer.text = String.format("%02d:%02d", minutes, seconds)
-            }
+    private var secondsElapsed = 0
+    private lateinit var timerHandler: Handler
+    private lateinit var timerRunnable: Runnable
 
-            override fun onFinish() {
-                tvTimer.text = "완료"
+    private fun startTimer() {
+        timerHandler = Handler()
+        timerRunnable = object : Runnable {
+            override fun run() {
+                secondsElapsed++
+                val minutes = secondsElapsed / 60
+                val seconds = secondsElapsed % 60
+                tvTimer.text = String.format("%02d:%02d", minutes, seconds)
+                timerHandler.postDelayed(this, 1000)
             }
-        }.start()
+        }
+        timerHandler.post(timerRunnable)
     }
+
+    override fun onPause() {
+        super.onPause()
+        timerHandler.removeCallbacks(timerRunnable)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        startTimer()
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()
@@ -123,8 +156,16 @@ class ExerciseRecordActivity : AppCompatActivity() {
         } else {
             // 다음 운동이 없는 경우 처리 (예: 화면 종료 또는 메시지 표시)
             Toast.makeText(this, "모든 운동을 완료했습니다.", Toast.LENGTH_SHORT).show()
+            stopTimer()
             finish()
         }
+    }
+
+    private fun stopTimer() {
+        timerHandler.removeCallbacks(timerRunnable)
+        // 타이머 중지 후 관련 변수 초기화
+        secondsElapsed = 0
+        //tvTimer.text = "00:00"
     }
 
     private fun updateExercise(exercise: Exercise?) {
