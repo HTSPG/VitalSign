@@ -41,7 +41,7 @@ class ExerciseRecordActivity : AppCompatActivity() {
         exerciseTitle = findViewById(R.id.exerciseTitle) // TextView 연결
         // 나머지 초기화...
 
-        // 첫 번째 운동 이름 설정
+/*        // 첫 번째 운동 이름 설정
         exerciseTitle.text = routine?.exercises?.firstOrNull()?.name ?: "운동 이름"
 
         // 루틴에서 운동 세트 데이터를 어댑터에 설정
@@ -53,10 +53,27 @@ class ExerciseRecordActivity : AppCompatActivity() {
                 isCompleted = false
             )
         }?.toMutableList() ?: mutableListOf())
+*/
+        val firstExercise = routine?.exercises?.firstOrNull()
+        exerciseTitle.text = firstExercise?.name ?: "운동 이름"
+        val initialSetsData = List(firstExercise?.sets ?: 0) { index ->
+            ExerciseSet(
+                setNumber = index + 1,  // 세트 번호 초기화
+                weight = firstExercise?.weight ?: 0.0,     // 초기 중량
+                repetitions = firstExercise?.repetitions ?: 0, // 초기 횟수
+                isCompleted = false     // 초기 완료 상태
+            )
+        }
+        setAdapter = ExerciseRecordSetAdapter(initialSetsData.toMutableList())
 
+        // 리사이클러뷰 설정
         setRecyclerView.layoutManager = LinearLayoutManager(this)
         setRecyclerView.adapter = setAdapter
 
+        /*
+        setRecyclerView.layoutManager = LinearLayoutManager(this)
+        setRecyclerView.adapter = setAdapter
+*/
         findViewById<Button>(R.id.btnAddSet).setOnClickListener {
             setAdapter.addSet()
         }
@@ -199,7 +216,7 @@ class ExerciseRecordActivity : AppCompatActivity() {
             // 각 세트에 대한 데이터 생성
             val setsData = List(it.sets) { index ->
                 ExerciseSet(
-                    setNumber = index + 1,  // 세트 번호
+                    setNumber = index + 1,  // 세트 번호는 index + 1로 설정하여 고유하게 만듦
                     weight = it.weight,     // 중량
                     repetitions = it.repetitions, // 횟수
                     isCompleted = false     // 완료 여부
@@ -208,5 +225,4 @@ class ExerciseRecordActivity : AppCompatActivity() {
             setAdapter.setData(setsData.toMutableList())
         }
     }
-
 }
