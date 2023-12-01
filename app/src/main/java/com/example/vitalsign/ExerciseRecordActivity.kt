@@ -116,7 +116,7 @@ class ExerciseRecordActivity : AppCompatActivity() {
     private lateinit var timerHandler: Handler
     private lateinit var timerRunnable: Runnable
 
-    private fun startTimer() {
+/*    private fun startTimer() {
         timerHandler = Handler()
         timerRunnable = object : Runnable {
             override fun run() {
@@ -129,6 +129,27 @@ class ExerciseRecordActivity : AppCompatActivity() {
         }
         timerHandler.post(timerRunnable)
     }
+*/
+    private fun startTimer() {
+        timerRunnable = object : Runnable {
+            override fun run() {
+                secondsElapsed++
+                val minutes = secondsElapsed / 60
+                val seconds = secondsElapsed % 60
+                tvTimer.text = String.format("%02d:%02d", minutes, seconds)
+                timerHandler.postDelayed(this, 1000)
+            }
+        }
+
+        // Check if the timerHandler is initialized before removing callbacks
+        if (this::timerHandler.isInitialized) {
+            timerHandler.removeCallbacks(timerRunnable)
+        }
+
+        timerHandler = Handler()
+        timerHandler.post(timerRunnable)
+    }
+
 
     override fun onPause() {
         super.onPause()
@@ -137,6 +158,10 @@ class ExerciseRecordActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        // 기존 타이머를 중지하고 다시 시작
+        if (this::timerHandler.isInitialized) {
+            timerHandler.removeCallbacks(timerRunnable)
+        }
         startTimer()
     }
 

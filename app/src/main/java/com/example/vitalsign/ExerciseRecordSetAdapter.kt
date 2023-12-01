@@ -38,11 +38,12 @@ class ExerciseRecordSetAdapter(private var dataSet: MutableList<ExerciseSet>) :
         }
     }
 
-    fun addSet() {
+   fun addSet() {
         val nextSetNumber = if (dataSet.isEmpty()) 1 else dataSet.last().setNumber + 1
         dataSet.add(ExerciseSet(nextSetNumber, 0.0, 0))
         notifyItemInserted(dataSet.size - 1)
-    }
+   }
+
 
     fun removeSet() {
         if (dataSet.isNotEmpty()) {
