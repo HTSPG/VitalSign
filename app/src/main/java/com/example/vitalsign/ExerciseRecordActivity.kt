@@ -73,19 +73,18 @@ class ExerciseRecordActivity : AppCompatActivity() {
             adjustRestTime(-10)
         }
 
-        findViewById<Button>(R.id.btnReset).setOnClickListener {
-            resetTimer()
-        }
 
         findViewById<Button>(R.id.btnNextExercise).setOnClickListener {
             moveToNextExercise()
         }
         setupRestTimer()
         findViewById<Button>(R.id.btnReset).setOnClickListener {
-            restTimeInSeconds = 60 // 휴식 시간을 초기값(예: 60초)으로 재설정
+            // restTimeInSeconds 값을 재설정하지 않고,
+            // 휴식 타이머를 현재 설정된 시간부터 다시 시작합니다.
             restTimerHandler.removeCallbacks(restTimerRunnable)
-            restTimerHandler.post(restTimerRunnable)
+            restTimerHandler.postDelayed(restTimerRunnable, 1000)
         }
+
         startTimer()
     }
 
@@ -103,7 +102,8 @@ class ExerciseRecordActivity : AppCompatActivity() {
     }
 
     private fun adjustRestTime(amount: Int) {
-        restTimeInSeconds = (restTimeInSeconds + amount).coerceAtLeast(0)
+        restTimeInSeconds += amount
+        restTimeInSeconds = restTimeInSeconds.coerceAtLeast(0) // 음수가 되지 않도록 보장
         tvRestTime.text = "${restTimeInSeconds}초"
     }
 
