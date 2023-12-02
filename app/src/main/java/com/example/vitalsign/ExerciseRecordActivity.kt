@@ -115,7 +115,10 @@ class ExerciseRecordActivity : AppCompatActivity() {
 
         viewModel.currentExerciseIndex.observe(this, Observer { index ->
             currentExerciseIndex = index
-            updateExercise(routineExercises?.getOrNull(index))
+            val exercise = routineExercises?.getOrNull(index)
+            exercise?.let {
+                updateExercise(it)
+            }
         })
 
         // 타이머 시작
@@ -289,7 +292,7 @@ class ExerciseRecordActivity : AppCompatActivity() {
         timer?.cancel()
     }
 
-    private fun moveToNextExercise() {
+    /*private fun moveToNextExercise() {
         // 다음 인덱스로 이동
        /* currentExerciseIndex++
 
@@ -319,7 +322,26 @@ class ExerciseRecordActivity : AppCompatActivity() {
             viewModel.stopTimer()
             finish()
         }
+    }*/
+    private fun moveToNextExercise() {
+        val currentIndex = viewModel.currentExerciseIndex.value ?: 0
+        val nextIndex = currentIndex + 1
+
+        if (nextIndex < (routineExercises?.size ?: 0)) {
+            // 다음 운동으로 업데이트
+            viewModel.setCurrentExerciseIndex(nextIndex)
+            val nextExercise = routineExercises?.getOrNull(nextIndex)
+            nextExercise?.let {
+                viewModel.setCurrentExercise(it)
+                updateExercise(it)
+            }
+        } else {
+            Toast.makeText(this, "모든 운동을 완료했습니다.", Toast.LENGTH_SHORT).show()
+            viewModel.stopTimer()
+            finish()
+        }
     }
+
 
     private fun stopTimer() {
         timerHandler.removeCallbacks(timerRunnable)
@@ -328,7 +350,7 @@ class ExerciseRecordActivity : AppCompatActivity() {
         //tvTimer.text = "00:00"
     }
 
-    private fun updateExercise(exercise: Exercise?) {
+    /*private fun updateExercise(exercise: Exercise?) {
         exercise?.let {
             exerciseTitle.text = it.name
             // 각 세트에 대한 데이터 생성
@@ -342,6 +364,19 @@ class ExerciseRecordActivity : AppCompatActivity() {
             }
             setAdapter.setData(setsData.toMutableList())
         }
+    }*/
+
+    private fun updateExercise(exercise: Exercise) {
+        exerciseTitle.text = exercise.name
+        val setsData = List(exercise.sets) { index ->
+            ExerciseSet(
+                setNumber = index + 1,
+                weight = exercise.weight,
+                repetitions = exercise.repetitions,
+                isCompleted = false
+            )
+        }
+        setAdapter.setData(setsData.toMutableList())
     }
 
 
@@ -408,6 +443,11 @@ class ExerciseRecordActivity : AppCompatActivity() {
         setAdapter = ExerciseRecordSetAdapter(mutableListOf())
         setRecyclerView.layoutManager = LinearLayoutManager(this)
         setRecyclerView.adapter = setAdapter
+
+        // '다음 운동' 버튼
+        findViewById<Button>(R.id.btnNextExercise).setOnClickListener {
+            moveToNextExercise()
+        }
 
         // ViewModel의 LiveData 관찰하여 UI 업데이트
         viewModel.exerciseName.observe(this, Observer { name ->
