@@ -62,6 +62,7 @@ class RoutineEditActivity : AppCompatActivity() {
             onAddButtonClicked = {
                 // '+ 운동 추가' 버튼을 클릭할 때의 로직
                 val intent = Intent(this, ExerciseListActivity::class.java)
+                intent.putExtra("ROUTINE_DATA", routine)
                 startActivity(intent)
             }
         )

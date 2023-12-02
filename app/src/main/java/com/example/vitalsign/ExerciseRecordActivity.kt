@@ -243,6 +243,11 @@ class ExerciseRecordActivity : AppCompatActivity() {
             // 휴식 타이머를 현재 설정된 시간부터 다시 시작합니다.
             restTimerHandler.removeCallbacks(restTimerRunnable)
             restTimerHandler.postDelayed(restTimerRunnable, 1000)
+
+            //아래 코드인데, 위 코드로 일부러 복잡하게? 해두신 이유가 있는거 같아서 일단은 위 코드로 해놓고 제 코드는 주석처리하겠습니다.
+//            viewModel.restTimeInSeconds.value = 60
+//            viewModel.stopRestTimer()
+//            viewModel.startRestTimer()
         }
 
         startTimer()
