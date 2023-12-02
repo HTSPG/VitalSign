@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.content.Intent
+import android.widget.ImageView
 import com.example.vitalsign.data.Exercise
 import com.example.vitalsign.data.Routine
 
@@ -12,17 +13,25 @@ class ExerciseListActivity : AppCompatActivity() {
 
     private lateinit var exerciseRecyclerView: RecyclerView
     private lateinit var exerciseAdapter: ExerciseAdapter
+    private lateinit var backBtnView: ImageView
+    private var routine:Routine? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise_list)
 
+        routine = intent.getSerializableExtra("ROUTINE_DATA") as? Routine
+
         exerciseRecyclerView = findViewById(R.id.rvExerciseList)
         exerciseAdapter = ExerciseAdapter(getExercises()) { exercise ->
-            onExerciseClicked(exercise)
+            onExerciseClicked(exercise, routine)
+        }
+        backBtnView = findViewById(R.id.backBtn)
+        backBtnView.setOnClickListener {
+            onBackPressed()
         }
 
-        val routine = intent.getSerializableExtra("ROUTINE_DATA") as? Routine
+
 
         //아이템 간격
         val spaceInPixels = 20 // 픽셀 단위
@@ -63,10 +72,13 @@ class ExerciseListActivity : AppCompatActivity() {
         )
     }
 
-    private fun onExerciseClicked(exercise: Exercise) {
-        // TODO: 운동 편집 화면으로 이동
+    private fun onExerciseClicked(exercise: Exercise, routine: Routine?) {
         val intent = Intent(this, ExerciseEditActivity::class.java)
         intent.putExtra("EXERCISE_DATA", exercise)
+        if (routine != null){
+            intent.putExtra("ROUTINE_DATA", routine)
+        }
+
         startActivity(intent)
     }
 }

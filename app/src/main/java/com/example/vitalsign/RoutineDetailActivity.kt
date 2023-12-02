@@ -2,6 +2,7 @@ package com.example.vitalsign
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +22,11 @@ class RoutineDetailActivity : AppCompatActivity() {
         val tvRoutineName = findViewById<TextView>(R.id.tvRoutineName)
         val btnStartRoutine = findViewById<Button>(R.id.btnStartRoutine)
         val btnEditRoutine = findViewById<Button>(R.id.btnEditRoutine)
+
+        val backBtnView = findViewById<ImageView>(R.id.backBtn)
+        backBtnView.setOnClickListener {
+            onBackPressed()
+        }
 
         // 인텐트에서 루틴 데이터 가져오기
         val routine = intent.getSerializableExtra("ROUTINE_DATA") as? Routine

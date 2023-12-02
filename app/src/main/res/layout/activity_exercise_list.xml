@@ -6,13 +6,26 @@
     android:padding="16dp">
 
     <!-- 운동 목록 제목 -->
-    <TextView
+    <FrameLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="운동 목록"
-        android:gravity="center"
-        android:textSize="24sp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/baseline_arrow_back_ios_new_24" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="운동 목록"
+            android:gravity="center"
+            android:textSize="24sp"/>
+    </FrameLayout>
+
 
     <!-- 운동 목록 RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView

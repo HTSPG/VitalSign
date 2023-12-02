@@ -1,11 +1,14 @@
 package com.example.vitalsign
 
+import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.vitalsign.R
 import com.example.vitalsign.data.Exercise
@@ -24,21 +27,37 @@ class ExerciseEditActivity : AppCompatActivity() {
 
         setRecyclerView = findViewById(R.id.recyclerViewExerciseSets)
 
+        val backBtnView = findViewById<ImageView>(R.id.backBtn)
+        backBtnView.setOnClickListener {
+            onBackPressed()
+        }
+
+        val routine = intent.getSerializableExtra("ROUTINE_DATA") as? Routine
 
         // 인텐트에서 운동 데이터 가져오기
         val exercise = intent.getSerializableExtra("EXERCISE_DATA") as? Exercise
         val exerciseNameView = findViewById<EditText>(R.id.tvExerciseName)
-        exerciseNameView.setText(exercise?.name ?: "벤치 프레스")
+        val exeName = exercise?.name ?: "벤치 프레스"
+        exerciseNameView.setText(exeName)
 
         val exSetMutableList = mutableListOf<ExerciseSet>()
         val setsNum = exercise?.sets ?: 4
+        val exeWeight = exercise?.weight ?:75.0
+        val exeRep = exercise?.repetitions ?: 10
+
+        val exeInst = Exercise(
+            exeName,
+            setsNum,
+            exeWeight,
+            exeRep
+        )
 
         for (i in 1..setsNum) {
             exSetMutableList.add(
                 ExerciseSet(
                     setNumber = i,
-                    weight = exercise?.weight ?:75.0,
-                    repetitions = exercise?.repetitions ?: 10,
+                    weight = exeWeight,
+                    repetitions = exeRep,
                     isCompleted = false
                 )
             )
@@ -76,7 +95,27 @@ class ExerciseEditActivity : AppCompatActivity() {
         // 완료 버튼
         val btnComplete: Button = findViewById(R.id.btnComplete)
         btnComplete.setOnClickListener {
-            // TODO: 운동 변경 사항 저장
+            val intent = Intent(this, RoutineEditActivity::class.java)
+//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            intent.flags = FLAG_ACTIVITY_CLEAR_TOP
+            if (routine != null){
+                routine.exercises.add(
+                    exeInst
+                )
+                intent.putExtra("ROUTINE_DATA", routine)
+            }
+            else{
+                val newRoutine = Routine(
+                    "6",
+                    "",
+                    "",
+                    mutableListOf(
+                        exeInst
+                    )
+                )
+                intent.putExtra("ROUTINE_DATA", newRoutine)
+            }
+            startActivity(intent)
             finish()
         }
     }

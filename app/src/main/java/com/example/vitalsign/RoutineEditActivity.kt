@@ -35,11 +35,22 @@ class RoutineEditActivity : AppCompatActivity() {
 
         binding.cancelERBtn.setOnClickListener {
             onBackPressed()
+//            routine!!.name = binding.tvRoutineName.text.toString()
+//            val intent = Intent(this, RoutineDetailActivity::class.java)
+//            intent.putExtra("ROUTINE_DATA", routine)
+//            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+//            startActivity(intent)
             this.finish()
         }
 
         binding.submitERBtn.setOnClickListener {
             //루틴 변경하는 기능 구현 필
+            routine!!.name = binding.tvRoutineName.text.toString()
+            val intent = Intent(this, RoutineDetailActivity::class.java)
+            intent.putExtra("ROUTINE_DATA", routine)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+            this.finish()
         }
 
         exercisesRecyclerView = findViewById(R.id.rvExercises)

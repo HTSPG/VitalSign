@@ -6,14 +6,27 @@
     android:padding="16dp">
 
     <!-- 루틴 이름 -->
-    <TextView
-        android:id="@+id/tvRoutineName"
+    <FrameLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="루틴 이름"
-        android:textSize="24sp"
-        android:gravity="center"
-        android:layout_marginBottom="16dp" />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/baseline_arrow_back_ios_new_24" />
+
+        <TextView
+            android:id="@+id/tvRoutineName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="루틴 이름"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
+    </FrameLayout>
+
     <LinearLayout
         android:orientation="horizontal"
         android:padding="8dp"
