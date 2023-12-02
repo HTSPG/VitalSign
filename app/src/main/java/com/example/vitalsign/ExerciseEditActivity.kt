@@ -5,8 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import com.example.vitalsign.R
+import com.example.vitalsign.data.Exercise
+import com.example.vitalsign.data.ExerciseSet
+import com.example.vitalsign.data.Routine
 
 class ExerciseEditActivity : AppCompatActivity() {
 
@@ -15,12 +19,32 @@ class ExerciseEditActivity : AppCompatActivity() {
     private lateinit var tvRestTime: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // TODO: 운동 편집 화면 인텐트 처리 필요
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise_edit)
 
         setRecyclerView = findViewById(R.id.recyclerViewExerciseSets)
-        setAdapter = ExerciseSetAdapter(mutableListOf())
+
+
+        // 인텐트에서 운동 데이터 가져오기
+        val exercise = intent.getSerializableExtra("EXERCISE_DATA") as? Exercise
+        val exerciseNameView = findViewById<EditText>(R.id.tvExerciseName)
+        exerciseNameView.setText(exercise?.name ?: "벤치 프레스")
+
+        val exSetMutableList = mutableListOf<ExerciseSet>()
+        val setsNum = exercise?.sets ?: 4
+
+        for (i in 1..setsNum) {
+            exSetMutableList.add(
+                ExerciseSet(
+                    setNumber = i,
+                    weight = exercise?.weight ?:75.0,
+                    repetitions = exercise?.repetitions ?: 10,
+                    isCompleted = false
+                )
+            )
+        }
+
+        setAdapter = ExerciseSetAdapter(exSetMutableList)
         setRecyclerView.layoutManager = LinearLayoutManager(this)
         setRecyclerView.adapter = setAdapter
 

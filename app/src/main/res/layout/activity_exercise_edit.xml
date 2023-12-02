@@ -15,11 +15,12 @@
         android:scaleType="centerCrop"/>
 
     <!-- 운동 이름 -->
-    <TextView
+    <EditText
         android:id="@+id/tvExerciseName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="운동 이름"
+        android:hint="운동 이름 입력"
         android:textSize="24sp"
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"/>
