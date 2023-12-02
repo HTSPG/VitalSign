@@ -34,12 +34,14 @@ class ExerciseRecordViewModel : ViewModel() {
 
     val currentExerciseIndex = MutableLiveData<Int>()
 
+    var isTimerRunning = false
+    var isRestTimerRunning = false
+
     private var timerHandler = Handler()
     private lateinit var timerRunnable: Runnable
 
     private val restTimerHandler = Handler(Looper.getMainLooper())
     private lateinit var restTimerRunnable: Runnable
-    var isRestTimerRunning = false
 
     init {
         exerciseName.value = "운동 이름"
@@ -64,15 +66,19 @@ class ExerciseRecordViewModel : ViewModel() {
     }
 
     fun startTimer() {
-        timerRunnable = object : Runnable {
-            override fun run() {
-                val newTime = (secondsElapsed.value ?: 0) + 1
-                secondsElapsed.postValue(newTime)
-                timerHandler.postDelayed(this, 1000)
+        if (!isTimerRunning) {
+            timerRunnable = object : Runnable {
+                override fun run() {
+                    val newTime = (secondsElapsed.value ?: 0) + 1
+                    secondsElapsed.postValue(newTime)
+                    timerHandler.postDelayed(this, 1000)
+                }
             }
+            timerHandler.post(timerRunnable)
+            isTimerRunning = true
         }
-        timerHandler.post(timerRunnable)
     }
+
 
     fun stopTimer() {
         timerHandler.removeCallbacks(timerRunnable)
@@ -93,7 +99,16 @@ class ExerciseRecordViewModel : ViewModel() {
 
     fun startRestTimer() {
         if (!isRestTimerRunning) {
-            restTimerHandler.postDelayed(restTimerRunnable, 1000)
+            restTimerRunnable = Runnable {
+                val currentTime = restTimeInSeconds.value ?: 0
+                if (currentTime > 0) {
+                    restTimeInSeconds.postValue(currentTime - 1)
+                    restTimerHandler.postDelayed(restTimerRunnable, 1000)
+                } else {
+                    isRestTimerRunning = false
+                }
+            }
+            restTimerHandler.post(restTimerRunnable)
             isRestTimerRunning = true
         }
     }
@@ -126,6 +141,9 @@ class ExerciseRecordActivity : AppCompatActivity() {
     private var routineExercises: List<Exercise>? = null
 
     private val viewModel: ExerciseRecordViewModel by viewModels()
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -236,7 +254,13 @@ class ExerciseRecordActivity : AppCompatActivity() {
             override fun run() {
                 if (restTimeInSeconds > 0) {
                     restTimeInSeconds--
+                    //여기서 viewModel도 같이 감소 시켜볼까?
                     tvRestTime.text = "${restTimeInSeconds}초"
+                    restTimerHandler.postDelayed(this, 1000)
+                }
+                val currentTime = viewModel.restTimeInSeconds.value ?: 0
+                if (currentTime > 0) {
+                    viewModel.restTimeInSeconds.postValue(currentTime - 1)
                     restTimerHandler.postDelayed(this, 1000)
                 }
             }
