@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
+import android.os.Looper
 import android.util.Rational
 import android.view.View
 import android.widget.Button
@@ -36,6 +37,10 @@ class ExerciseRecordViewModel : ViewModel() {
     private var timerHandler = Handler()
     private lateinit var timerRunnable: Runnable
 
+    private val restTimerHandler = Handler(Looper.getMainLooper())
+    private lateinit var restTimerRunnable: Runnable
+    var isRestTimerRunning = false
+
     init {
         exerciseName.value = "운동 이름"
         restTimeInSeconds.value = 60
@@ -44,6 +49,7 @@ class ExerciseRecordViewModel : ViewModel() {
         currentExerciseIndex.value = 0
 
         startTimer() // ViewModel 초기화 시 타이머 시작
+        setupRestTimer()
     }
 
     fun setCurrentExercise(exercise: Exercise) {
@@ -70,6 +76,33 @@ class ExerciseRecordViewModel : ViewModel() {
 
     fun stopTimer() {
         timerHandler.removeCallbacks(timerRunnable)
+    }
+
+    private fun setupRestTimer() {
+        restTimerRunnable = Runnable {
+            val currentTime = restTimeInSeconds.value ?: 0
+            if (currentTime > 0) {
+                restTimeInSeconds.postValue(currentTime - 1)
+                restTimerHandler.postDelayed(restTimerRunnable, 1000)
+                isRestTimerRunning = true
+            } else {
+                isRestTimerRunning = false
+            }
+        }
+    }
+
+    fun startRestTimer() {
+        if (!isRestTimerRunning) {
+            restTimerHandler.postDelayed(restTimerRunnable, 1000)
+            isRestTimerRunning = true
+        }
+    }
+
+    fun stopRestTimer() {
+        restTimerRunnable?.let {
+            restTimerHandler.removeCallbacks(it)
+            isRestTimerRunning = false
+        }
     }
 
     // 필요한 다른 메서드 추가
@@ -270,6 +303,7 @@ class ExerciseRecordActivity : AppCompatActivity() {
         super.onPause()
         if (!isInPictureInPictureMode) {
             viewModel.stopTimer()
+            viewModel.stopRestTimer()
         }
         //timerHandler.removeCallbacks(timerRunnable)
     }
@@ -278,6 +312,9 @@ class ExerciseRecordActivity : AppCompatActivity() {
         super.onResume()
         if (!isInPictureInPictureMode) {
             viewModel.startTimer()
+            if (viewModel.isRestTimerRunning) {
+                viewModel.startRestTimer()
+            }
         }
         // 기존 타이머를 중지하고 다시 시작
         /*if (this::timerHandler.isInitialized) {
@@ -381,6 +418,7 @@ class ExerciseRecordActivity : AppCompatActivity() {
 
 
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onUserLeaveHint() {
         val params = PictureInPictureParams.Builder()
@@ -422,7 +460,7 @@ class ExerciseRecordActivity : AppCompatActivity() {
         })
 
         viewModel.restTimeInSeconds.observe(this, Observer { time ->
-            tvPipRestTime.text = "$time 초"
+            tvPipRestTime.text = "휴식시간 : $time 초"
         })
 
         viewModel.exerciseName.observe(this, Observer { name ->
@@ -430,6 +468,7 @@ class ExerciseRecordActivity : AppCompatActivity() {
         })
 
         tvPipExerciseName.text = viewModel.exerciseName.value
+
     }
 
     private fun bindRegularViews() {

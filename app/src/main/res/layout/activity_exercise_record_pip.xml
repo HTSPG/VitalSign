@@ -64,6 +64,6 @@
         android:id="@+id/tvPipRestTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="휴식 시간: 60초"
+        android:text="휴식 시간 : 60초"
         android:textAppearance="?attr/textAppearanceBody1" />
 </LinearLayout>
