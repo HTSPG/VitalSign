@@ -249,11 +249,15 @@ class ExerciseRecordActivity : AppCompatActivity() {
                     //여기서 viewModel도 같이 감소 시켜볼까?
                     tvRestTime.text = "${restTimeInSeconds}초"
                     restTimerHandler.postDelayed(this, 1000)
+                } else if(restTimeInSeconds == 0) {
+                    restTimeInSeconds = 60
                 }
                 val currentTime = viewModel.restTimeInSeconds.value ?: 0
                 if (currentTime > 0) {
                     viewModel.restTimeInSeconds.postValue(currentTime - 1)
                     //restTimerHandler.postDelayed(this, 1000)
+                } else if (currentTime == 0) {
+                    viewModel.restTimeInSeconds.value = 60
                 }
             }
         }
@@ -496,6 +500,20 @@ class ExerciseRecordActivity : AppCompatActivity() {
         // '다음 운동' 버튼
         findViewById<Button>(R.id.btnNextExercise).setOnClickListener {
             moveToNextExercise()
+        }
+
+        findViewById<Button>(R.id.btnReset).setOnClickListener {
+            // restTimeInSeconds 값을 재설정하지 않고,
+            // 휴식 타이머를 현재 설정된 시간부터 다시 시작합니다.
+            restTimerHandler.removeCallbacks(restTimerRunnable)
+            restTimerHandler.postDelayed(restTimerRunnable, 1000)
+        }
+        findViewById<Button>(R.id.btnIncreaseRest).setOnClickListener {
+            adjustRestTime(10)
+        }
+
+        findViewById<Button>(R.id.btnDecreaseRest).setOnClickListener {
+            adjustRestTime(-10)
         }
 
         // ViewModel의 LiveData 관찰하여 UI 업데이트
