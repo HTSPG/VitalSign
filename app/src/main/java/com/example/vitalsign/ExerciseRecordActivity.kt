@@ -85,37 +85,29 @@ class ExerciseRecordViewModel : ViewModel() {
     }
 
     private fun setupRestTimer() {
-        restTimerRunnable = Runnable {
-            val currentTime = restTimeInSeconds.value ?: 0
-            if (currentTime > 0) {
-                restTimeInSeconds.postValue(currentTime - 1)
-                restTimerHandler.postDelayed(restTimerRunnable, 1000)
-                isRestTimerRunning = true
-            } else {
-                isRestTimerRunning = false
+        restTimerRunnable = object : Runnable {
+            override fun run() {
+                val currentTime = restTimeInSeconds.value ?: 0
+                if (currentTime > 0) {
+                    restTimeInSeconds.postValue(currentTime - 1)
+                    restTimerHandler.postDelayed(this, 1000)
+                } else {
+                    isRestTimerRunning = false
+                }
             }
         }
     }
 
     fun startRestTimer() {
         if (!isRestTimerRunning) {
-            restTimerRunnable = Runnable {
-                val currentTime = restTimeInSeconds.value ?: 0
-                if (currentTime > 0) {
-                    restTimeInSeconds.postValue(currentTime - 1)
-                    restTimerHandler.postDelayed(restTimerRunnable, 1000)
-                } else {
-                    isRestTimerRunning = false
-                }
-            }
-            restTimerHandler.post(restTimerRunnable)
             isRestTimerRunning = true
+            restTimerHandler.postDelayed(restTimerRunnable, 1000)
         }
     }
 
     fun stopRestTimer() {
-        restTimerRunnable?.let {
-            restTimerHandler.removeCallbacks(it)
+        if (isRestTimerRunning) {
+            restTimerHandler.removeCallbacks(restTimerRunnable)
             isRestTimerRunning = false
         }
     }
@@ -266,7 +258,7 @@ class ExerciseRecordActivity : AppCompatActivity() {
                 val currentTime = viewModel.restTimeInSeconds.value ?: 0
                 if (currentTime > 0) {
                     viewModel.restTimeInSeconds.postValue(currentTime - 1)
-                    restTimerHandler.postDelayed(this, 1000)
+                    //restTimerHandler.postDelayed(this, 1000)
                 }
             }
         }
@@ -334,7 +326,6 @@ class ExerciseRecordActivity : AppCompatActivity() {
             viewModel.stopTimer()
             viewModel.stopRestTimer()
         }
-        //timerHandler.removeCallbacks(timerRunnable)
     }
 
     override fun onResume() {
@@ -345,11 +336,6 @@ class ExerciseRecordActivity : AppCompatActivity() {
                 viewModel.startRestTimer()
             }
         }
-        // 기존 타이머를 중지하고 다시 시작
-        /*if (this::timerHandler.isInitialized) {
-            timerHandler.removeCallbacks(timerRunnable)
-        }
-        startTimer()*/
     }
 
 
