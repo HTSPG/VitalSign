@@ -20,6 +20,7 @@ class ExerciseEditActivity : AppCompatActivity() {
     private lateinit var setRecyclerView: RecyclerView
     private lateinit var setAdapter: ExerciseSetAdapter
     private lateinit var tvRestTime: TextView
+    private lateinit var exeImgView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +40,7 @@ class ExerciseEditActivity : AppCompatActivity() {
         val exerciseNameView = findViewById<EditText>(R.id.tvExerciseName)
         val exeName = exercise?.name ?: "벤치 프레스"
         exerciseNameView.setText(exeName)
+
 
         val exSetMutableList = mutableListOf<ExerciseSet>()
         val setsNum = exercise?.sets ?: 4
@@ -66,6 +68,16 @@ class ExerciseEditActivity : AppCompatActivity() {
         setAdapter = ExerciseSetAdapter(exSetMutableList)
         setRecyclerView.layoutManager = LinearLayoutManager(this)
         setRecyclerView.adapter = setAdapter
+        exeImgView = findViewById(R.id.imgExercise)
+
+        when(exeName){
+            "벤치 프레스"-> exeImgView.setImageResource(R.drawable.bench_press)
+            "덤벨 플라이"-> exeImgView.setImageResource(R.drawable.dumbbell_fly)
+            "랫 풀 다운"-> exeImgView.setImageResource(R.drawable.lat_pull_down)
+            "숄더 프레스"-> exeImgView.setImageResource(R.drawable.shoulder_press)
+            "바이셉스 컬"-> exeImgView.setImageResource(R.drawable.biceps_curl)
+            else->exeImgView.setImageResource(R.drawable.bench_press)
+        }
 
         val btnAddSet: Button = findViewById(R.id.btnAddSet)
         btnAddSet.setOnClickListener {

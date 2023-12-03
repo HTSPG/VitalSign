@@ -10,6 +10,7 @@ import android.os.Looper
 import android.util.Rational
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -127,6 +128,7 @@ class ExerciseRecordActivity : AppCompatActivity() {
     private lateinit var tvRestTime: TextView
     private lateinit var restTimerHandler: Handler
     private lateinit var restTimerRunnable: Runnable
+    private lateinit var exeImgView: ImageView
     private var restTimeInSeconds = 60
     private var timer: CountDownTimer? = null
     private var currentExerciseIndex = 0 // 현재 운동 인덱스
@@ -144,6 +146,14 @@ class ExerciseRecordActivity : AppCompatActivity() {
         // ViewModel의 LiveData 관찰하여 UI 업데이트
         viewModel.exerciseName.observe(this, Observer { name ->
             exerciseTitle.text = name
+            when(name){
+                "벤치 프레스"-> exeImgView.setImageResource(R.drawable.bench_press)
+                "덤벨 플라이"-> exeImgView.setImageResource(R.drawable.dumbbell_fly)
+                "랫 풀 다운"-> exeImgView.setImageResource(R.drawable.lat_pull_down)
+                "숄더 프레스"-> exeImgView.setImageResource(R.drawable.shoulder_press)
+                "바이셉스 컬"-> exeImgView.setImageResource(R.drawable.biceps_curl)
+                else->exeImgView.setImageResource(R.drawable.bench_press)
+            }
         })
 
         viewModel.restTimeInSeconds.observe(this, Observer { time ->
@@ -174,6 +184,7 @@ class ExerciseRecordActivity : AppCompatActivity() {
         tvRestTime = findViewById(R.id.tvRestTime)
         setRecyclerView = findViewById(R.id.recyclerViewExerciseSets)
         exerciseTitle = findViewById(R.id.exerciseTitle) // TextView 연결
+        exeImgView = findViewById(R.id.imgExercise)
         // 나머지 초기화...
 
 /*        // 첫 번째 운동 이름 설정
