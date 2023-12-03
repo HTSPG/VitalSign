@@ -507,6 +507,7 @@ class ExerciseRecordActivity : AppCompatActivity() {
         tvRestTime = findViewById(R.id.tvRestTime)
         exerciseTitle = findViewById(R.id.exerciseTitle)
         setRecyclerView = findViewById(R.id.recyclerViewExerciseSets)
+        exeImgView = findViewById(R.id.imgExercise)
 
         // RecyclerView 및 어댑터 설정
         setAdapter = ExerciseRecordSetAdapter(mutableListOf())
@@ -547,6 +548,17 @@ class ExerciseRecordActivity : AppCompatActivity() {
             tvTimer.text = String.format("%02d:%02d", minutes, seconds)
         })
 
+        viewModel.exerciseName.observe(this, Observer { name ->
+            exerciseTitle.text = name
+            when(name){
+                "벤치 프레스"-> exeImgView.setImageResource(R.drawable.bench_press)
+                "덤벨 플라이"-> exeImgView.setImageResource(R.drawable.dumbbell_fly)
+                "랫 풀 다운"-> exeImgView.setImageResource(R.drawable.lat_pull_down)
+                "숄더 프레스"-> exeImgView.setImageResource(R.drawable.shoulder_press)
+                "바이셉스 컬"-> exeImgView.setImageResource(R.drawable.biceps_curl)
+                else->exeImgView.setImageResource(R.drawable.bench_press)
+            }
+        })
         // 리사이클러뷰 및 기타 뷰 초기화
         // ... 여기에 리사이클러뷰 및 기타 필요한 뷰의 초기화 로직을 추가합니다.
 
