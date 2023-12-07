@@ -48,11 +48,12 @@
             android:textSize="18sp" />
     </LinearLayout>
 
-    <FrameLayout
+    <ImageView
         android:id="@+id/flExerciseGraph"
         android:layout_width="match_parent"
-        android:layout_height="338dp"
+        android:layout_height="210dp"
         android:layout_marginTop="16dp"
+        android:src="@drawable/main_graph"
         android:background="#D3D3D3" /> <!-- 그래프 배경 색상 -->
 
     <!-- 최근 수행 루틴 및 나의 루틴 버튼 -->
